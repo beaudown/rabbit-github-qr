@@ -1,13 +1,35 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "1970-01-01T00:00:00.000Z",
+  "updatedAt": "2026-08-14T17:41:40.462Z",
   "repository": {
-    "owner": "",
-    "repo": "",
+    "owner": "beaudown",
+    "repo": "rabbit-github-qr",
     "branch": "main",
     "root": "rabbit-files"
   },
-  "files": [],
+  "files": [
+    {
+      "id": "20260814174139-2340b60d-SKILL.md",
+      "name": "SKILL.md",
+      "path": "rabbit-files/files/2026/08/20260814174139-2340b60d-SKILL.md",
+      "size": 4642,
+      "mime": "text/markdown",
+      "sha256": "0690b85bdc54d5db684e962e90ce54bd451dd7d86652d6e03e2a4ae51e71f623",
+      "tags": [
+        "Temporary root",
+        "rabbit",
+        "broker",
+        "privileges",
+        "SU",
+        "super user"
+      ],
+      "note": "Skill that contains knowledge to temporarily root rabbit R1 device",
+      "uploadedAt": "2026-08-14T17:41:39.565Z",
+      "updatedAt": "2026-08-14T17:41:39.565Z",
+      "downloadUrl": "https://raw.githubusercontent.com/beaudown/rabbit-github-qr/main/rabbit-files/files/2026/08/20260814174139-2340b60d-SKILL.md",
+      "githubUrl": "https://github.com/beaudown/rabbit-github-qr/blob/main/rabbit-files/files/2026/08/20260814174139-2340b60d-SKILL.md"
+    }
+  ],
   "ignoredRemotePaths": [],
   "archivedPaths": []
 }
