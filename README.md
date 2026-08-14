@@ -29,6 +29,8 @@ The app is preconfigured for `beaudown/rabbit-github-qr`, branch `main`, with fi
 
 The token is held in `sessionStorage` only. It is not persisted in IndexedDB, committed to GitHub, logged, or cached by the service worker. Closing the browser/PWA session may require entering it again.
 
+The connection screen includes a direct link to GitHub's fine-grained token form and shows the exact repository and permission choices.
+
 ## File limits
 
 The GitHub Contents API does not support files larger than 100 MB. This app uses a 95 MiB safety limit so failures occur before hashing/uploading. Larger files should use GitHub Releases or Git LFS and can then be adopted into the index by URL in a future extension.

@@ -47,6 +47,10 @@
             <div class="top-actions"><span class="pill secure">Token stays in this session</span><button class="button quiet back-home" type="button">Back</button></div>
           </div>
           <p class="helper">Use a fine-grained token limited to this repository with <strong>Contents: read and write</strong>. The token is never written to the file index, IndexedDB, logs, or the service-worker cache.</p>
+          <div class="token-help">
+            <a class="button quiet" href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Create repository-only token ↗</a>
+            <small>First time only: choose <strong>Only select repositories → rabbit-github-qr</strong>, then set <strong>Contents → Read and write</strong>. Paste the generated token below.</small>
+          </div>
           <form id="connection-form" class="form-grid" autocomplete="off">
             <label class="wide">Fine-grained GitHub token<input id="token" name="token" type="password" autocapitalize="none" autocomplete="off" spellcheck="false" required /></label>
             <label>Owner<input id="owner" name="owner" autocapitalize="none" spellcheck="false" required /></label>
