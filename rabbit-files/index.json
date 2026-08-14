@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-14T17:41:40.462Z",
+  "updatedAt": "2026-08-14T18:35:00.000Z",
   "repository": {
     "owner": "beaudown",
     "repo": "rabbit-github-qr",
@@ -8,6 +8,27 @@
     "root": "rabbit-files"
   },
   "files": [
+    {
+      "id": "20260814-root-broker-skill",
+      "name": "rabbit-r1-temp-root-broker-2026-08-14.zip",
+      "path": "rabbit-files/files/2026/08/20260814-root-broker-skill-rabbit-r1-temp-root-broker-2026-08-14.zip",
+      "size": 7309,
+      "mime": "application/zip",
+      "sha256": "8d52dcb416135647d48058d90488fa44f154e92be7a95aa176c6baf11e7f9300",
+      "tags": [
+        "rabbit-r1",
+        "skill",
+        "temp-root",
+        "root-broker"
+      ],
+      "note": "Exportable Codex skill for stock-preserving Rabbit r1 temporary-root broker planning. Not a live root payload.",
+      "uploadedAt": "2026-08-14T16:40:00.000Z",
+      "updatedAt": "2026-08-14T16:40:00.000Z",
+      "downloadUrl": "https://raw.githubusercontent.com/beaudown/rabbit-github-qr/main/rabbit-files/files/2026/08/20260814-root-broker-skill-rabbit-r1-temp-root-broker-2026-08-14.zip",
+      "githubUrl": "https://github.com/beaudown/rabbit-github-qr/blob/main/rabbit-files/files/2026/08/20260814-root-broker-skill-rabbit-r1-temp-root-broker-2026-08-14.zip",
+      "syncState": "indexed",
+      "localState": "metadata-only"
+    },
     {
       "id": "20260814174139-2340b60d-SKILL.md",
       "name": "SKILL.md",
