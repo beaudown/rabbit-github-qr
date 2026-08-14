@@ -1,0 +1,39 @@
+name: Audit Rabbit download index
+
+on:
+  schedule:
+    - cron: "17 16 * * 1,4"
+      timezone: "America/Los_Angeles"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rabbit-index-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - name: Audit index and hashes
+        run: node scripts/audit-index.mjs
+      - name: Commit audit report when changed
+        run: |
+          if git diff --quiet -- rabbit-files/audit-report.json; then
+            echo "Audit report is unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add rabbit-files/audit-report.json
+          git commit -m "chore: update Rabbit download audit"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

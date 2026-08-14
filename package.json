@@ -1,0 +1,23 @@
+{
+  "name": "rabbit-github-qr",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test",
+    "audit:index": "node scripts/audit-index.mjs",
+    "verify": "npm test && npm run audit:index && npm run build"
+  },
+  "dependencies": {
+    "qrcode": "1.5.4"
+  },
+  "devDependencies": {
+    "vite": "^7.3.6"
+  }
+}

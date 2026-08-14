@@ -1,0 +1,15 @@
+{
+  "name": "Rabbit GitHub QR",
+  "short_name": "Rabbit QR",
+  "description": "Upload files to GitHub, maintain a local-first index, and generate Rabbit r1 download QR codes.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0d0f0c",
+  "theme_color": "#11130f",
+  "orientation": "any",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

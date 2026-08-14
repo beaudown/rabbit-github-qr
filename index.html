@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#11130f" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Rabbit QR" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <title>Rabbit GitHub QR</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <a class="brand" href="#home" aria-label="Rabbit GitHub QR home">
+          <span class="brand-mark" aria-hidden="true">R1</span>
+          <span><strong>Rabbit GitHub QR</strong><small>upload · index · download</small></span>
+        </a>
+        <div class="top-actions">
+          <span id="network-pill" class="pill">Checking network…</span>
+          <button id="install-button" class="button quiet" type="button" hidden>Install app</button>
+          <button id="settings-button" class="button quiet" type="button">GitHub</button>
+        </div>
+      </header>
+
+      <main>
+        <section id="home-panel" class="hero panel">
+          <p class="eyebrow">One library for every Rabbit download</p>
+          <h1>What would you like to do?</h1>
+          <p class="lede">Upload files to GitHub and turn each direct download link into a QR code your Rabbit r1 can scan.</p>
+          <div class="choice-grid">
+            <button id="choose-upload" class="choice" type="button">
+              <span class="choice-icon">↑</span><strong>Upload files</strong><small>Choose one or many files, push them, and create QR codes.</small>
+            </button>
+            <button id="choose-library" class="choice" type="button">
+              <span class="choice-icon">⌕</span><strong>Open library</strong><small>Search links, show QR codes, and reconcile GitHub.</small>
+            </button>
+          </div>
+        </section>
+
+        <section id="connection-panel" class="panel" hidden>
+          <div class="section-heading">
+            <div><p class="eyebrow">Private connection</p><h2>Connect one GitHub repository</h2></div>
+            <div class="top-actions"><span class="pill secure">Token stays in this session</span><button class="button quiet back-home" type="button">Back</button></div>
+          </div>
+          <p class="helper">Use a fine-grained token limited to this repository with <strong>Contents: read and write</strong>. The token is never written to the file index, IndexedDB, logs, or the service-worker cache.</p>
+          <form id="connection-form" class="form-grid" autocomplete="off">
+            <label class="wide">Fine-grained GitHub token<input id="token" name="token" type="password" autocapitalize="none" autocomplete="off" spellcheck="false" required /></label>
+            <label>Owner<input id="owner" name="owner" autocapitalize="none" spellcheck="false" required /></label>
+            <label>Repository<input id="repo" name="repo" autocapitalize="none" spellcheck="false" required /></label>
+            <label>Branch<input id="branch" name="branch" value="main" autocapitalize="none" spellcheck="false" required /></label>
+            <label>Library folder<input id="root-path" name="rootPath" value="rabbit-files" autocapitalize="none" spellcheck="false" required /></label>
+            <label class="check wide"><input id="auto-repair" name="autoRepair" type="checkbox" checked /> Automatically push recoverable local-only uploads when this app reconnects.</label>
+            <div class="wide action-row"><button class="button primary" type="submit">Connect repository</button><button id="disconnect-button" class="button danger" type="button">Forget session token</button></div>
+          </form>
+          <p id="connection-status" class="status" role="status" aria-live="polite"></p>
+        </section>
+
+        <section id="upload-panel" class="panel" hidden>
+          <div class="section-heading"><div><p class="eyebrow">Step 1</p><h2>Choose files</h2></div><button class="button quiet back-home" type="button">Back</button></div>
+          <label id="drop-zone" class="drop-zone">
+            <input id="file-input" type="file" multiple />
+            <span class="drop-icon">＋</span><strong>Tap to choose files</strong><small>Up to 95 MiB per file. APK, ZIP, PDF, images, documents, and other file types are accepted.</small>
+          </label>
+          <div class="form-grid compact">
+            <label>Tags, separated by commas<input id="upload-tags" placeholder="keyboard, browser, release" /></label>
+            <label>Short note<input id="upload-note" placeholder="What this file is for" /></label>
+          </div>
+          <div id="upload-queue" class="queue empty">No files selected.</div>
+          <div class="action-row"><button id="upload-button" class="button primary" type="button" disabled>Upload and create QR codes</button><button id="clear-selection" class="button quiet" type="button">Clear</button></div>
+          <p id="upload-status" class="status" role="status" aria-live="polite"></p>
+        </section>
+
+        <section id="library-panel" class="panel" hidden>
+          <div class="section-heading"><div><p class="eyebrow">Download library</p><h2>Files and QR codes</h2></div><button class="button quiet back-home" type="button">Back</button></div>
+          <div class="library-tools">
+            <label class="search"><span>⌕</span><input id="search-input" type="search" placeholder="Search name, tag, note, or path" /></label>
+            <button id="sync-button" class="button primary" type="button">Reconcile GitHub</button>
+            <button id="export-button" class="button quiet" type="button">Export index</button>
+          </div>
+          <div id="summary-strip" class="summary-strip"></div>
+          <div id="audit-banner" class="audit-banner" hidden></div>
+          <div id="reconcile-panel" class="reconcile-panel" hidden>
+            <div class="section-heading"><div><p class="eyebrow">Needs a decision</p><h3>Reconciliation findings</h3></div></div>
+            <div id="reconcile-list"></div>
+          </div>
+          <div id="file-grid" class="file-grid"></div>
+          <p id="library-empty" class="empty-state">No indexed files yet. Upload your first file to create the library.</p>
+          <p id="library-status" class="status" role="status" aria-live="polite"></p>
+        </section>
+      </main>
+
+      <footer><span>Local-first PWA</span><span>•</span><span id="footer-repo">Repository not connected</span></footer>
+    </div>
+
+    <dialog id="confirm-dialog">
+      <form method="dialog">
+        <h3 id="confirm-title">Confirm action</h3>
+        <p id="confirm-message"></p>
+        <div class="action-row"><button value="cancel" class="button quiet">Cancel</button><button id="confirm-accept" value="confirm" class="button danger">Confirm</button></div>
+      </form>
+    </dialog>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
