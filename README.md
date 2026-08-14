@@ -18,6 +18,8 @@ An installable local-first PWA for macOS, iPadOS, and iOS that uploads files to 
 
 ## GitHub setup
 
+The app is preconfigured for `beaudown/rabbit-github-qr`, branch `main`, with file storage under `rabbit-files`. These values persist locally and remain editable from the GitHub settings screen.
+
 1. Create a dedicated **public** repository for this app and file library. A private repository can be managed by the PWA, but an unauthenticated Rabbit cannot use its raw-file QR links.
 2. Push this project to its `main` branch.
 3. In **Settings → Pages**, select **GitHub Actions** as the source.

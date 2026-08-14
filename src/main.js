@@ -17,6 +17,13 @@ import {
 
 const elements = Object.fromEntries([...document.querySelectorAll("[id]")].map((element) => [element.id, element]));
 const panels = [elements["home-panel"], elements["connection-panel"], elements["upload-panel"], elements["library-panel"]];
+const DEFAULT_CONFIG = {
+  owner: "beaudown",
+  repo: "rabbit-github-qr",
+  branch: "main",
+  root: "rabbit-files",
+  autoRepair: true,
+};
 
 const state = {
   config: null,
@@ -57,7 +64,8 @@ function derivePagesConfig() {
 }
 
 async function loadLocalState() {
-  state.config = (await localStore.getState("config")) || derivePagesConfig();
+  state.config = (await localStore.getState("config")) || derivePagesConfig() || { ...DEFAULT_CONFIG };
+  await localStore.setState("config", state.config);
   state.index = (await localStore.getState("index")) || emptyIndex(state.config || {});
   if (state.config) {
     elements.owner.value = state.config.owner || "";

@@ -4,7 +4,7 @@ Updated: 2026-08-14
 
 ## Status
 
-The standalone PWA is implemented, locally verified, and ready for publication. It has not yet been pushed to a GitHub repository or deployed to GitHub Pages.
+The standalone PWA is implemented, locally verified, and published at `beaudown/rabbit-github-qr`. GitHub Pages enablement and the first live deployment are in progress.
 
 ## Purpose
 
@@ -24,6 +24,7 @@ Provide one installable macOS/iPadOS/iOS tool that:
 - The token is stored only in browser `sessionStorage`; it is not written to IndexedDB, GitHub, logs, or the service-worker cache.
 - A public repository is required for unauthenticated direct downloads from Rabbit QR scans. Private-repository upload works, but the generated raw URLs will require authentication and therefore are not suitable for stock Rabbit delivery.
 - GitHub deletes require a confirmation dialog. The scheduled audit never deletes or archives.
+- Repository settings default to `beaudown/rabbit-github-qr`, branch `main`, and root `rabbit-files`; editable changes persist in local IndexedDB. The token remains session-only.
 
 ## Canonical paths
 
