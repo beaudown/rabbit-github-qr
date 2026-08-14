@@ -67,11 +67,13 @@ input::placeholder { color: #6f776b; }
 .pill.online, .pill.secure { color: #dfff8d; border-color: #5e7723; }
 .pill.offline { color: #ffc26d; border-color: #825b1e; }
 
-.drop-zone { min-height: 15rem; display: grid; place-items: center; align-content: center; gap: 0.5rem; padding: 2rem; text-align: center; background: #11140f; border: 2px dashed #4a5543; border-radius: 1.2rem; cursor: pointer; }
-.drop-zone:hover { border-color: var(--lime); }
+.drop-zone { min-height: 15rem; display: grid; place-items: center; align-content: center; gap: 0.5rem; padding: 2rem; text-align: center; background: #11140f; border: 2px dashed #4a5543; border-radius: 1.2rem; cursor: pointer; transition: border-color 150ms ease, background 150ms ease, transform 150ms ease; }
+.drop-zone:hover, .drop-zone:focus-within { border-color: var(--lime); }
+.drop-zone.is-dragging { background: #1d2912; border-color: var(--lime); box-shadow: 0 0 0 4px rgb(190 255 73 / 12%); transform: scale(1.01); }
+.drop-zone.is-dragging .drop-icon { transform: translateY(0.3rem); }
 .drop-zone input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 .drop-zone small { max-width: 34rem; color: var(--muted); line-height: 1.45; }
-.drop-icon { font-size: 2.2rem; color: var(--lime); }
+.drop-icon { font-size: 2.2rem; color: var(--lime); transition: transform 150ms ease; }
 .queue { display: grid; gap: 0.5rem; margin: 1rem 0; }
 .queue.empty { padding: 1rem; color: var(--muted); text-align: center; border: 1px dashed var(--line); border-radius: 0.8rem; }
 .queue-item { display: flex; justify-content: space-between; gap: 1rem; padding: 0.8rem 1rem; background: #121510; border: 1px solid var(--line); border-radius: 0.75rem; }

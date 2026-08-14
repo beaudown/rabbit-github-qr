@@ -148,6 +148,43 @@ function renderQueue() {
   elements["upload-button"].disabled = state.selectedFiles.some((file) => file.size > MAX_FILE_BYTES);
 }
 
+function selectFiles(files) {
+  const combined = [...state.selectedFiles, ...files];
+  const unique = new Map(combined.map((file) => [`${file.name}:${file.size}:${file.lastModified}`, file]));
+  state.selectedFiles = [...unique.values()];
+  renderQueue();
+  setStatus(
+    elements["upload-status"],
+    `${state.selectedFiles.length} file${state.selectedFiles.length === 1 ? "" : "s"} ready. Add more or upload when ready.`,
+    "success",
+  );
+}
+
+function bindDropZone() {
+  const zone = elements["drop-zone"];
+  const hasFiles = (event) => [...(event.dataTransfer?.types || [])].includes("Files");
+
+  for (const eventName of ["dragenter", "dragover"]) {
+    zone.addEventListener(eventName, (event) => {
+      if (!hasFiles(event)) return;
+      event.preventDefault();
+      if (event.dataTransfer) event.dataTransfer.dropEffect = "copy";
+      zone.classList.add("is-dragging");
+    });
+  }
+
+  zone.addEventListener("dragleave", (event) => {
+    if (!zone.contains(event.relatedTarget)) zone.classList.remove("is-dragging");
+  });
+
+  zone.addEventListener("drop", (event) => {
+    if (!hasFiles(event)) return;
+    event.preventDefault();
+    zone.classList.remove("is-dragging");
+    selectFiles(event.dataTransfer?.files || []);
+  });
+}
+
 async function queueFile(file, tags, note) {
   if (file.size > MAX_FILE_BYTES) throw new Error(`${file.name} exceeds the 95 MiB GitHub upload limit.`);
   const now = new Date();
@@ -489,13 +526,15 @@ function bindEvents() {
   elements["disconnect-button"].addEventListener("click", forgetToken);
   for (const button of document.querySelectorAll(".back-home")) button.addEventListener("click", () => showPanel(elements["home-panel"]));
   elements["file-input"].addEventListener("change", () => {
-    state.selectedFiles = [...elements["file-input"].files];
-    renderQueue();
+    selectFiles(elements["file-input"].files);
+    elements["file-input"].value = "";
   });
+  bindDropZone();
   elements["clear-selection"].addEventListener("click", () => {
     state.selectedFiles = [];
     elements["file-input"].value = "";
     renderQueue();
+    setStatus(elements["upload-status"], "Selection cleared.");
   });
   elements["upload-button"].addEventListener("click", uploadSelected);
   elements["sync-button"].addEventListener("click", () => syncRepository());
